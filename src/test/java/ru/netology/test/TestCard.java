@@ -18,22 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCard {
 
-    private WebDriver driver;
-
-    @BeforeAll
-    public static void setUpAll() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeEach
-    public void setDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-    }
-
     @BeforeEach
     void setUp() {
         open("http://localhost:9999");
@@ -42,12 +26,6 @@ public class TestCard {
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataGenerator.getVerificationCodeFor(authInfo);
         val dashboardPage = verificationPage.validVerify(verificationCode);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-        driver = null;
     }
 
     @Test
